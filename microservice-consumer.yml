@@ -1,0 +1,49 @@
+debug: true
+server:
+  port: 9080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9091/eureka/
+keycloak-client:
+  server-url: http://localhost:18080/auth
+  realm:  spring-micro-main
+spring:
+  application:
+    name: microservice-consumer
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            provider: keycloak
+            client-id: spring-micro-consumer
+            client-secret: ${client-secret}
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:9080/login/oauth2/code/keycloak
+            scope: openid
+        provider:
+          keycloak:
+            authorization-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/auth
+            token-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/token
+            user-info-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/userinfo
+            jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+            user-name-attribute: name
+            user-info-authentication-method: header
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+  kafka:
+    producer:
+      bootstrap-servers: ${kafka-bootstrap.servers}
+      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring:
+           json:
+              trusted: 
+                 packages: '*'
+topic:
+   name:
+     consumer: test.topic
