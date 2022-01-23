@@ -18,7 +18,7 @@ spring:
         registration:
           keycloak:
             provider: keycloak
-            client-id: ${keycloack-client.id:}
+            client-id: ${keycloack-client.id:spring-micro-consumer}
             client-secret: ${keycloack-client.secret}
             authorization-grant-type: authorization_code
             redirect-uri: ${keycloack.redirect-uri}
