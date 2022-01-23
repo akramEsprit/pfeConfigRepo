@@ -5,10 +5,10 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:9091/eureka/
+      defaultZone: ${eureka.client.serviceUrl.defaultZone:http://eureka-server:9091/eureka/} 
 keycloak-client:
-  server-url: http://localhost:18080/auth
-  realm:  spring-micro-main
+  server-url: ${keycloak-client.server-url:http://localhost:18080/auth}
+  realm:  ${keycloack-client.realm:spring-micro-main}
 spring:
   application:
     name: microservice-producer
@@ -18,10 +18,10 @@ spring:
         registration:
           keycloak:
             provider: keycloak
-            client-id: spring-micro-producer
+            client-id: ${keycloack-client.id:spring-micro-producer}
             client-secret: ${client-secret}
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:9081/login/oauth2/code/keycloak
+            redirect-uri: ${keycloack.redirect-uri:http://localhost:9081/login/oauth2/code/keycloak}
             scope: openid
         provider:
           keycloak:
