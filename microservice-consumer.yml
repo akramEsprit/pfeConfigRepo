@@ -39,6 +39,7 @@ spring:
       bootstrap-servers: ${kafka-bootstrap.servers}
       key-serializer: org.apache.kafka.common.serialization.StringDeserializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      group-id: group_id
       properties:
         spring:
            json:
