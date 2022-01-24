@@ -5,10 +5,10 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${eureka.client.serviceUrl.defaultZone} 
+      defaultZone: ${eureka.client.Url} 
 keycloak-client:
-  server-url: ${keycloak-client.server-url}
-  realm:  ${keycloack-client.realm}
+  server-url: ${keycloak.url}
+  realm:  ${keycloack.realm}
 spring:
   application:
     name: microservice-producer
@@ -18,22 +18,22 @@ spring:
         registration:
           keycloak:
             provider: keycloak
-            client-id: ${keycloack-client.id}
-            client-secret: ${client-secret}
+            client-id: ${keycloack.id}
+            client-secret: ${keycloack-secret}
             authorization-grant-type: authorization_code
             redirect-uri: ${keycloack.redirect-uri}
             scope: openid
         provider:
           keycloak:
-            authorization-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/auth
-            token-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/token
-            user-info-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/userinfo
-            jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+            authorization-uri: ${keycloak.server-url}/realms/${keycloak.realm}/protocol/openid-connect/auth
+            token-uri: ${keycloak.server-url}/realms/${keycloak.realm}/protocol/openid-connect/token
+            user-info-uri: ${keycloak.server-url}/realms/${keycloak.realm}/protocol/openid-connect/userinfo
+            jwk-set-uri: ${keycloak.server-url}/realms/${keycloak.realm}/protocol/openid-connect/certs
             user-name-attribute: name
             user-info-authentication-method: header
       resourceserver:
         jwt:
-          jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+          jwk-set-uri: ${keycloak.server-url}/realms/${keycloak.realm}/protocol/openid-connect/certs
   kafka:
     producer:
       bootstrap-servers: ${kafka-bootstrap.servers}
