@@ -8,7 +8,7 @@ eureka:
       defaultZone: ${eureka.client.Url} 
 keycloak-client:
   server-url: ${keycloak.url}
-  realm:  ${keycloack.realm}
+  realm:  ${keycloak.realm}
 spring:
   application:
     name: microservice-producer
@@ -18,10 +18,10 @@ spring:
         registration:
           keycloak:
             provider: keycloak
-            client-id: ${keycloack.id}
-            client-secret: ${keycloack-secret}
+            client-id: ${keycloak.id}
+            client-secret: ${keycloak-secret}
             authorization-grant-type: authorization_code
-            redirect-uri: ${keycloack.redirect-uri}
+            redirect-uri: ${keycloak.redirect-uri}
             scope: openid
         provider:
           keycloak:
