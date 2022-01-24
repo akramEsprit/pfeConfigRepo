@@ -47,4 +47,4 @@ spring:
                  packages: '*'
 topic:
    name:
-     consumer: test.topic
+     producer: test.topic
