@@ -36,7 +36,7 @@ spring:
           jwk-set-uri: ${keycloak.server-url}/realms/${keycloak.realm}/protocol/openid-connect/certs
   kafka:
     producer:
-      bootstrap-servers:${kafka-bootstrap.servers}
+      bootstrap-servers: ${kafka-bootstrap.servers}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
       group-id: group_id
